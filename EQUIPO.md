@@ -4,7 +4,7 @@ Cada integrante completa **su propia fila** con un commit propio: cambia los ___
 
 | Nombre | Usuario | Perfil | Me comprometo a |
 |---|---|---|---|
-| David Ibarra | @___ | https://github.com/___ | ___ |
+| David Ibarra | @Vadid03 | https://github.com/Vadid03 | Apoyar el análisis de datos y la interpretación de resultados |
 | Adrián Punina | @___ | https://github.com/___ | ___ |
 | Emily Ruiz | @___ | https://github.com/___ | ___ |
 | Micaela Samaniego (líder) | @___ | https://github.com/___ | ___ |
