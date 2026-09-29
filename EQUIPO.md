@@ -6,6 +6,6 @@ Cada integrante completa **su propia fila** con un commit propio: cambia los ___
 |---|---|---|---|
 | David Ibarra | @Vadid03 | https://github.com/Vadid03 | Apoyar el análisis de datos y la interpretación de resultados |
 | Adrián Punina | @adriann0115 | https://github.com/adriann0115 | Me comprometo a colaborar en la búsqueda, revisión y análisis de datos para el observatorio |
-| Emily Ruiz | @___ | https://github.com/___ | ___ |
+| Emily Ruiz | @emruizvi | https://github.com/emruizvi | Me comprometo a revisar y analizar los datos del proyecto, apoyar la interpretación de los resultados y compartir mis aportes con el equipo dentro de los plazos acordados. |
 | Micaela Samaniego (líder) | @___ | https://github.com/___ | ___ |
 | Jaime Tapia | @___ | https://github.com/___ | ___ |
