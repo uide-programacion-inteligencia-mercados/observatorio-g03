@@ -4,8 +4,8 @@ Cada integrante completa **su propia fila** con un commit propio: cambia los ___
 
 | Nombre | Usuario | Perfil | Me comprometo a |
 |---|---|---|---|
-| David Ibarra | @Vadid03 | https://github.com/Vadid03 | Apoyar el análisis de datos y la interpretación de resultados |
+| Micaela Samaniego (líder) | https://github.com/Micaelasamaniego| Coordinar al equipo, organizar el análisis de datos y revisar los resultados del observatorio |
 | Adrián Punina | @adriann0115 | https://github.com/adriann0115 | Me comprometo a colaborar en la búsqueda, revisión y análisis de datos para el observatorio |
 | Emily Ruiz | @emruizvi | https://github.com/emruizvi | Me comprometo a revisar y analizar los datos del proyecto, apoyar la interpretación de los resultados y compartir mis aportes con el equipo dentro de los plazos acordados. |
-| Micaela Samaniego (líder) | https://github.com/Micaelasamaniego| https://github.com/TU_USUARIO | Coordinar al equipo, organizar el análisis de datos y revisar los resultados del observatorio |
+| David Ibarra | @Vadid03 | https://github.com/Vadid03 | Apoyar el análisis de datos y la interpretación de resultados |
 | Jaime Tapia | @arielotc0 | https://github.com/arielotc0 | Colaborar en la búsqueda, análisis y desarrollo del observatorio |
