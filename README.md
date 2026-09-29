@@ -8,7 +8,7 @@ Emily Ruiz
 David Ibarra
 Jaime Tapia
 ## La pregunta que responde nuestro observatorio
-¿Cómo ha variado la recaudación tributaria del SRI entre las distintas actividades económicas del Ecuador durante el período analizado, y qué diferencias se observan entre ellas?
+¿Cómo ha variado la recaudación tributaria del SRI por actividad económica en Ecuador durante el período analizado y cómo se compara con la evolución del PIB y del sector servicios?
 
 ## De dónde viene cada dato
 Se completa en la tarea «Dos fuentes entrando».
