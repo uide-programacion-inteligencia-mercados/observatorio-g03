@@ -1,0 +1,40 @@
+name: Orquestador diario G03
+
+on:
+  schedule:
+    - cron: "0 11 * * *"      # todos los días a las 11:00 UTC (06:00 en Quito)
+  workflow_dispatch:         # botón para lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+jobs:
+  correr-robot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Traer el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar lo necesario
+        run: pip install -r requirements.txt
+
+      - name: Correr el robot del Banco Mundial
+        run: python robot_banco_mundial.py
+
+      - name: Guardar los datos nuevos
+        run: |
+          git config user.name "observatorio-bot"
+          git config user.email "observatorio-bot@users.noreply.github.com"
+          git add data/ logs/
+          if git diff --cached --quiet; then
+            echo "No hay cambios que guardar."
+          else
+            git commit -m "Datos del $(date -u +%Y-%m-%d)"
+            git push
+          fi
