@@ -1,17 +1,38 @@
+# ============================================================================
+# ARCHIVO: .github/workflows/orquestador_diario.yml  (el DESPERTADOR)  · VERSIÓN 3 · SEMANA 8
+# Novedades de la semana 8: instala las herramientas del informe (Jinja2 y WeasyPrint),
+# guarda el PDF en la carpeta reports/ y lo deja también como archivo descargable.
+# Se conservan: casilla de simulacro, guardado SIEMPRE de la bitácora y la salud,
+# y la alerta (abre un Issue si el robot falla y lo cierra cuando se recupera).
+# ============================================================================
 name: Orquestador diario G03
 
 on:
   schedule:
-    - cron: "0 11 * * *"      # todos los días a las 11:00 UTC (06:00 en Quito)
-  workflow_dispatch:         # botón para lanzarlo a mano desde la pestaña Actions
+    - cron: "15 11 * * *"      # reloj del equipo: minuto 15, hora 11 UTC
+  workflow_dispatch:         # botón Run workflow en la pestaña Actions
+    inputs:
+      simular_falla:
+        description: "Simulacro: provocar una falla para probar la alerta"
+        type: boolean
+        default: false
 
 permissions:
-  contents: write
+  contents: write            # guardar datos y el informe en la casa
+  issues: write              # abrir y cerrar alertas
+
+concurrency:
+  group: orquestador-g03
+  cancel-in-progress: false
 
 jobs:
   correr-robot:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      URL_CORRIDA: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
       - name: Traer el código
         uses: actions/checkout@v4
@@ -21,20 +42,60 @@ jobs:
         with:
           python-version: "3.12"
 
+      # S08 · WeasyPrint necesita la librería de texto «pango». Casi siempre ya viene; si no, la instala.
+      - name: Preparar las librerías del PDF
+        run: |
+          sudo apt-get install -y --no-install-recommends libpango-1.0-0 libpangoft2-1.0-0 \
+            || (sudo apt-get update && sudo apt-get install -y --no-install-recommends libpango-1.0-0 libpangoft2-1.0-0)
+
       - name: Instalar lo necesario
         run: pip install -r requirements.txt
 
-      - name: Correr el robot del Banco Mundial
+      - name: Correr el robot y escribir el informe PDF
+        env:
+          SIMULAR_FALLA: ${{ inputs.simular_falla }}
         run: python robot_banco_mundial.py
 
-      - name: Guardar los datos nuevos
+      # S08 · El informe también queda como archivo descargable de la corrida (pestaña Summary, sección Artifacts).
+      - name: Guardar el informe como archivo descargable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-${{ github.run_number }}
+          path: reports/
+          if-no-files-found: ignore
+
+      # Se hace SIEMPRE (if: always()): así también queda guardado el registro de las fallas.
+      - name: Guardar datos, informe, bitácora y salud (siempre)
+        if: always()
         run: |
           git config user.name "observatorio-bot"
           git config user.email "observatorio-bot@users.noreply.github.com"
-          git add data/ logs/
+          git add data/ logs/ reports/
           if git diff --cached --quiet; then
             echo "No hay cambios que guardar."
           else
-            git commit -m "Datos del $(date -u +%Y-%m-%d)"
-            git push
+            git commit -m "Corrida ${{ github.run_number }} del $(date -u +%Y-%m-%d) (${{ job.status }})"
+            git pull --rebase --quiet && git push
           fi
+
+      # LA ALERTA: solo si algo falló (if: failure()). Si ya hay una abierta, comenta en ella.
+      - name: Abrir o actualizar la alerta
+        if: failure()
+        run: |
+          gh label create alerta-robot --color C8102E --description "El robot del observatorio falló" --force
+          ABIERTA=$(gh issue list --label alerta-robot --state open --json number --jq '.[].number' | head -n 1)
+          if [ -n "$ABIERTA" ]; then
+            gh issue comment "$ABIERTA" --body "Volvió a fallar el $(date -u '+%Y-%m-%d %H:%M') UTC. Detalle: $URL_CORRIDA"
+          else
+            gh issue create --label alerta-robot --title "🚨 El robot G03 falló" \
+              --body "El robot falló el $(date -u '+%Y-%m-%d %H:%M') UTC. Detalle: $URL_CORRIDA · Revisen logs/salud_g03.csv. El informe anterior sigue intacto en reports/. Esta alerta se cierra sola cuando el robot vuelva a funcionar."
+          fi
+
+      # Si todo salió bien y había una alerta abierta, se cierra con una nota.
+      - name: Cerrar la alerta si el robot se recuperó
+        if: success()
+        run: |
+          for n in $(gh issue list --label alerta-robot --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Recuperado: la corrida del $(date -u '+%Y-%m-%d %H:%M') UTC terminó bien. $URL_CORRIDA"
+          done
