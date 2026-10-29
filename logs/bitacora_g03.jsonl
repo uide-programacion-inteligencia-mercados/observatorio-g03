@@ -1,0 +1,5 @@
+{"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "inicio de la corrida", "simulacro": false}
+{"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "NY.GDP.MKTP.KD.ZG: recibido"}
+{"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
+{"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
+{"momento_utc": "2026-10-29T01:35:12+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
