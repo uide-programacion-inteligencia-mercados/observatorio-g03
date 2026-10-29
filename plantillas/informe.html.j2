@@ -1,1 +1,85 @@
+{#- ============================================================================
+ARCHIVO: plantillas/informe.html.j2        (el MOLDE del informe)        · SEMANA 8
+QUÉ ES:   Una página web con huecos. Donde ves {{ algo }}, Jinja2 pone un valor.
+          Donde ves {% for ... %}, repite un bloque (una fila por año).
+          Donde ves {% if ... %}, muestra un bloque solo si se cumple la condición.
+QUIÉN LO USA: robot_banco_mundial.py lo rellena y WeasyPrint lo convierte en PDF.
+ESTO PUEDEN CAMBIARLO: los textos fijos, los colores y el orden de los bloques.
+          Los {{ huecos }} deben llamarse igual que las claves de construir_contexto().
+============================================================================ -#}
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>{{ titulo }}</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm;
+          @bottom-left  { content: "{{ pie }}"; font: 7.5pt sans-serif; color: #777; }
+          @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 7.5pt sans-serif; color: #777; } }
+  body { font-family: "Carlito", "Calibri", "DejaVu Sans", sans-serif; font-size: 10.5pt; color: #1F2A33; line-height: 1.45; margin: 0; }
+  h1, h2, .kpi b, th, .etiqueta { font-family: "DejaVu Sans", sans-serif; }
+  .banda { background: #002C71; color: white; padding: 12px 16px; border-radius: 6px; }
+  .banda .kick { color: #EAAA00; font-size: 7.5pt; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+  .banda h1 { font-size: 17pt; margin: 3px 0 2px; }
+  .banda .sub { font-size: 9pt; opacity: .9; }
+  h2 { color: #002C71; font-size: 12.5pt; margin: 16px 0 6px; border-bottom: 2px solid #EAAA00; padding-bottom: 2px; break-after: avoid; }
+  .kpis { display: flex; gap: 8px; margin: 12px 0 4px; }
+  .kpi { flex: 1; border: 1px solid #D5D5D5; border-radius: 6px; padding: 8px 10px; }
+  .kpi .etiqueta { font-size: 7pt; letter-spacing: 1px; text-transform: uppercase; color: #910048; font-weight: bold; }
+  .kpi b { display: block; font-size: 15pt; color: #002C71; margin-top: 2px; }
+  .kpi small { color: #666; font-size: 8pt; }
+  .titular { background: #F3F6FB; border-left: 4px solid #002C71; padding: 8px 12px; margin: 10px 0; font-size: 12pt; }
+  .aviso { background: #FFF3CD; border-left: 4px solid #EAAA00; padding: 8px 12px; margin: 8px 0; font-size: 9.5pt; }
+  .reco { background: #FBE9F0; border-left: 4px solid #910048; padding: 8px 12px; margin: 8px 0; }
+  .semaforo { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 4px; }
+  .verde { background: #2E7D32; } .amarillo { background: #EAAA00; } .rojo { background: #910048; } .gris { background: #BDBDBD; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 4px 0 8px; }
+  th { background: #002C71; color: white; text-align: left; padding: 4px 6px; font-size: 8pt; }
+  td { padding: 3px 6px; border-bottom: 1px solid #E7E6E6; }
+  td.n, th.n { text-align: right; }
+  img.grafico { width: 100%; margin: 4px 0; }
+  .fuentes { font-size: 8.5pt; color: #555; }
+</style>
+</head>
+<body>
 
+<div class="banda">
+  <div class="kick">Observatorio {{ equipo }} · Informe automático</div>
+  <h1>{{ titulo }}</h1>
+  <div class="sub">Para: {{ para_quien }} · Informe del {{ fecha }} · generado por el robot, sin intervención humana</div>
+</div>
+
+{% if es_viejo %}
+<div class="aviso"><b>Atención:</b> el dato más reciente tiene {{ antiguedad }} año(s) de antigüedad. Léelo con cuidado.</div>
+{% endif %}
+
+<div class="titular"><b>{{ titular }}</b></div>
+
+<div class="kpis">
+  {% for k in indicadores %}
+  <div class="kpi"><span class="etiqueta">{{ k.nombre }}</span><b>{{ k.ultimo }}</b><small>{{ k.anio }} · {{ k.cambio }}</small></div>
+  {% endfor %}
+  <div class="kpi"><span class="etiqueta">Salud del robot</span><b><span class="semaforo {{ salud_color }}"></span>{{ salud_estado }}</b><small>{{ salud_motivo }}</small></div>
+</div>
+
+<h2>Cómo se ven los últimos años</h2>
+<img class="grafico" src="{{ grafico_uri }}" alt="Evolución de los dos indicadores">
+
+<table>
+  <tr><th>Año</th>{% for k in indicadores %}<th class="n">{{ k.nombre }}</th>{% endfor %}</tr>
+  {% for f in tabla %}
+  <tr><td>{{ f.anio }}</td>{% for v in f.valores %}<td class="n">{{ v }}</td>{% endfor %}</tr>
+  {% else %}
+  <tr><td colspan="3">No hay filas para mostrar.</td></tr>
+  {% endfor %}
+</table>
+
+<h2>Qué significa para el negocio</h2>
+<p>{{ lectura_negocio }}</p>
+
+<div class="reco"><b>Qué recomendamos:</b> {{ recomendacion }}</div>
+
+<p class="fuentes"><b>De dónde salen los datos.</b> Banco Mundial (indicadores del Ecuador, {{ desde }} a {{ hasta }}). Este informe es el paso INFORMAR del recorrido BUSCAR, GUARDAR, LIMPIAR, ANALIZAR, AUTOMATIZAR, MOSTRAR, INFORMAR. Corrida {{ corrida }}.</p>
+
+</body>
+</html>
