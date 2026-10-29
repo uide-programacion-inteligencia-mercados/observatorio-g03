@@ -2,3 +2,4 @@ fecha_utc,corrida,estado,motivo,filas,segundos
 2026-10-29T01:35:12+00:00,40801247622,verde,todo bien,22,3.8
 2026-10-29T01:38:29+00:00,40801562770,rojo,la fuente falló: NY.GDP.MKTP.KD.ZG: no contestó después de 4 intentos (SIMULACRO: el Banco Mundial no contesta (falla provocada a propósito)),0,14.0
 2026-10-29T01:40:41+00:00,40801801365,verde,todo bien,22,2.4
+2026-10-29T17:25:37+00:00,40921130482,verde,todo bien,22,4.7
