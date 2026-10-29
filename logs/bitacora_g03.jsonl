@@ -3,3 +3,9 @@
 {"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
 {"momento_utc": "2026-10-29T01:35:09+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
 {"momento_utc": "2026-10-29T01:35:12+00:00", "corrida": "40801247622", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
+{"momento_utc": "2026-10-29T01:38:15+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "INFO", "evento": "inicio de la corrida", "simulacro": true}
+{"momento_utc": "2026-10-29T01:38:15+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "WARNING", "evento": "NY.GDP.MKTP.KD.ZG: intento 1 falló; espero 2 s y reintento", "error": "SIMULACRO: el Banco Mundial no contesta (falla provocada a propósito)"}
+{"momento_utc": "2026-10-29T01:38:17+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "WARNING", "evento": "NY.GDP.MKTP.KD.ZG: intento 2 falló; espero 4 s y reintento", "error": "SIMULACRO: el Banco Mundial no contesta (falla provocada a propósito)"}
+{"momento_utc": "2026-10-29T01:38:21+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "WARNING", "evento": "NY.GDP.MKTP.KD.ZG: intento 3 falló; espero 8 s y reintento", "error": "SIMULACRO: el Banco Mundial no contesta (falla provocada a propósito)"}
+{"momento_utc": "2026-10-29T01:38:29+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "ERROR", "evento": "la fuente falló: NY.GDP.MKTP.KD.ZG: no contestó después de 4 intentos (SIMULACRO: el Banco Mundial no contesta (falla provocada a propósito))"}
+{"momento_utc": "2026-10-29T01:38:29+00:00", "corrida": "40801562770", "equipo": "g03", "nivel": "INFO", "evento": "plan B: se conservan intactos los datos y el informe de la última corrida buena"}
