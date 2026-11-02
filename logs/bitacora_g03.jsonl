@@ -35,3 +35,8 @@
 {"momento_utc": "2026-11-01T17:07:23+00:00", "corrida": "41329732207", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
 {"momento_utc": "2026-11-01T17:07:23+00:00", "corrida": "41329732207", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
 {"momento_utc": "2026-11-01T17:07:25+00:00", "corrida": "41329732207", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
+{"momento_utc": "2026-11-02T20:45:03+00:00", "corrida": "41521994253", "equipo": "g03", "nivel": "INFO", "evento": "inicio de la corrida", "simulacro": false}
+{"momento_utc": "2026-11-02T20:45:03+00:00", "corrida": "41521994253", "equipo": "g03", "nivel": "INFO", "evento": "NY.GDP.MKTP.KD.ZG: recibido"}
+{"momento_utc": "2026-11-02T20:45:03+00:00", "corrida": "41521994253", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
+{"momento_utc": "2026-11-02T20:45:03+00:00", "corrida": "41521994253", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
+{"momento_utc": "2026-11-02T20:45:05+00:00", "corrida": "41521994253", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
