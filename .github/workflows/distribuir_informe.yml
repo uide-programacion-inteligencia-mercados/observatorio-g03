@@ -1,0 +1,107 @@
+# ============================================================================
+# ARCHIVO: .github/workflows/distribuir_informe.yml     (el DESPERTADOR DEL CARTERO)  · SEMANA 9
+# QUÉ HACE: Despierta al cartero (distribuir_informe.py) para que haga llegar el informe
+#           por Slack, Teams o correo. Es INDEPENDIENTE del despertador del robot:
+#           el robot escribe el informe; el cartero lo reparte.
+# CUÁNDO:   Todos los lunes (reloj) o cuando alguien pulsa «Run workflow» (botón).
+# LAS LLAVES NO ESTÁN AQUÍ: viven en Settings → Secrets and variables → Actions.
+# ESTO PUEDEN CAMBIARLO: la hora del cron (recuerden que GitHub usa hora UTC; Quito = UTC menos 5).
+# ============================================================================
+name: Distribuir informe
+
+on:
+  - cron: '45 11 * * *':
+    - cron: "7 12 * * 1"          # lunes 12:07 UTC = lunes 07:07 en Quito (evitamos la hora en punto: hay mucho tráfico)
+  workflow_dispatch:              # botón Run workflow en la pestaña Actions
+    inputs:
+      modo:
+        description: "ensayo = arma el mensaje pero NO envía · real = envía de verdad"
+        type: choice
+        options: [ensayo, real]
+        default: ensayo
+      simular_falla:
+        description: "Simulacro: provocar una falla del servicio para probar los reintentos y la alerta"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write                 # guardar la bitácora de envíos en la casa
+  issues: write                   # abrir y cerrar la alerta
+
+concurrency:
+  group: distribuir-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      URL_CORRIDA: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - name: Traer el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # El reloj no tiene casillas: cuando corre solo, inputs.modo viene vacío y se usa «real».
+      - name: Hacer llegar el informe
+        env:
+          MODO_ENVIO: ${{ inputs.modo || 'real' }}
+          SIMULAR_FALLA: ${{ inputs.simular_falla }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          CORREO_REMITENTE: ${{ secrets.CORREO_REMITENTE }}
+          CORREO_DESTINO: ${{ secrets.CORREO_DESTINO }}
+        run: python distribuir_informe.py
+
+      # if: always() = se hace SIEMPRE, también si el envío falló: la bitácora es la memoria de los fallos.
+      - name: Guardar la bitácora de envíos (siempre)
+        if: always()
+        run: |
+          git config user.name "observatorio-bot"
+          git config user.email "observatorio-bot@users.noreply.github.com"
+          git add logs/
+          if git diff --cached --quiet; then
+            echo "No hay cambios que guardar."
+          else
+            git commit -m "Envío ${{ github.run_number }} del $(date -u +%Y-%m-%d) (${{ job.status }})"
+            git pull --rebase --quiet && git push
+          fi
+
+      - name: Abrir o actualizar la alerta de envío
+        if: failure()
+        run: |
+          gh label create alerta-envio --color C8102E --description "No se pudo hacer llegar el informe" --force
+          ABIERTA=$(gh issue list --label alerta-envio --state open --json number --jq '.[].number' | head -n 1)
+          if [ -n "$ABIERTA" ]; then
+            gh issue comment "$ABIERTA" --body "Volvió a fallar el envío el $(date -u '+%Y-%m-%d %H:%M') UTC. Detalle: $URL_CORRIDA"
+          else
+            gh issue create --label alerta-envio \
+              --title "🚨 No se pudo hacer llegar el informe" \
+              --body "El cartero falló el $(date -u '+%Y-%m-%d %H:%M') UTC.
+
+          **Qué mirar:** abra la corrida, entre al trabajo enviar y lea la línea que empieza con RESULTADO.
+          **Detalle:** $URL_CORRIDA
+          **Bitácora:** logs/ (archivo envios_...jsonl)
+
+          El informe NO se perdió: sigue guardado en reports/. Esta alerta se cierra sola cuando el envío funcione."
+          fi
+
+      # Un ensayo no envía nada, así que no cuenta como recuperación: solo se cierra tras un envío real.
+      - name: Cerrar la alerta si el envío se recuperó
+        if: success() && inputs.modo != 'ensayo'
+        run: |
+          for n in $(gh issue list --label alerta-envio --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Recuperado: el envío del $(date -u '+%Y-%m-%d %H:%M') UTC terminó bien. $URL_CORRIDA"
+          done
