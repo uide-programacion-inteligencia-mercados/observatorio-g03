@@ -1,0 +1,7 @@
+ASUNTO: [Observatorio G03] Informe del 2026-11-05 · robot VERDE
+
+El sector servicios desacelera su expansión frente a la tasa del PIB
+
+Estado del robot: VERDE
+Informe completo (PDF): https://github.com/uide-programacion-inteligencia-mercados/observatorio-g03/blob/main/reports/informe_g03.pdf
+Fuente y fecha de los datos: dentro del informe, en la sección «Calidad de los datos».
