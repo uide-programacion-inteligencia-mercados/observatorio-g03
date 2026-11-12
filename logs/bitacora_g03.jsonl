@@ -95,3 +95,11 @@
 {"momento_utc": "2026-11-11T18:40:16+00:00", "corrida": "43079905641", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
 {"momento_utc": "2026-11-11T18:40:16+00:00", "corrida": "43079905641", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
 {"momento_utc": "2026-11-11T18:40:18+00:00", "corrida": "43079905641", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
+{"momento_utc": "2026-11-12T18:53:16+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "INFO", "evento": "inicio de la corrida", "simulacro": false}
+{"momento_utc": "2026-11-12T18:53:17+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "INFO", "evento": "NY.GDP.MKTP.KD.ZG: recibido"}
+{"momento_utc": "2026-11-12T18:53:47+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "WARNING", "evento": "NV.SRV.TOTL.KD.ZG: intento 1 falló; espero 2 s y reintento", "error": "HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30)"}
+{"momento_utc": "2026-11-12T18:54:19+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "WARNING", "evento": "NV.SRV.TOTL.KD.ZG: intento 2 falló; espero 4 s y reintento", "error": "HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30)"}
+{"momento_utc": "2026-11-12T18:54:53+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "WARNING", "evento": "NV.SRV.TOTL.KD.ZG: intento 3 falló; espero 8 s y reintento", "error": "HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30)"}
+{"momento_utc": "2026-11-12T18:55:01+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "INFO", "evento": "NV.SRV.TOTL.KD.ZG: recibido"}
+{"momento_utc": "2026-11-12T18:55:01+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "INFO", "evento": "datos aprobados y guardados", "filas": 22, "archivo": "data/indicadores_g03.csv"}
+{"momento_utc": "2026-11-12T18:55:03+00:00", "corrida": "43284396879", "equipo": "g03", "nivel": "INFO", "evento": "informe PDF generado", "archivo": "reports/informe_g03.pdf", "paginas": 2, "kb": 66}
