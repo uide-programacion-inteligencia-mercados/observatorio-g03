@@ -11,3 +11,4 @@
 {"momento": "2026-11-10T18:50:38Z", "fecha": "2026-11-10", "equipo": "g03", "canal": "slack", "estado": "enviado", "modo": "real", "intentos": 1, "detalle": "ok"}
 {"momento": "2026-11-11T18:53:00Z", "fecha": "2026-11-11", "equipo": "g03", "canal": "slack", "estado": "enviado", "modo": "real", "intentos": 1, "detalle": "ok"}
 {"momento": "2026-11-12T19:08:52Z", "fecha": "2026-11-12", "equipo": "g03", "canal": "slack", "estado": "enviado", "modo": "real", "intentos": 1, "detalle": "ok"}
+{"momento": "2026-11-13T18:47:35Z", "fecha": "2026-11-13", "equipo": "g03", "canal": "slack", "estado": "enviado", "modo": "real", "intentos": 1, "detalle": "ok"}
