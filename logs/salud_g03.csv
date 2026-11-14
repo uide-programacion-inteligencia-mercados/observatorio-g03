@@ -19,3 +19,4 @@ fecha_utc,corrida,estado,motivo,filas,segundos
 2026-11-11T18:40:18+00:00,43079905641,verde,todo bien,22,2.6
 2026-11-12T18:55:03+00:00,43284396879,amarillo,"funcionó, pero tuvo que reintentar",22,106.9
 2026-11-13T18:31:17+00:00,43483198595,verde,todo bien,22,51.6
+2026-11-14T17:05:01+00:00,43618888560,rojo,"la fuente falló: NY.GDP.MKTP.KD.ZG: no contestó después de 4 intentos (HTTPSConnectionPool(host='api.worldbank.org', port=443): Read timed out. (read timeout=30))",0,134.3
