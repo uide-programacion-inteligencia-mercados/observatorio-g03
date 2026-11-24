@@ -29,3 +29,4 @@ fecha_utc,corrida,estado,motivo,filas,segundos
 2026-11-21T17:57:17+00:00,44932792783,verde,todo bien,22,2.5
 2026-11-22T18:29:57+00:00,45055372449,verde,todo bien,22,2.5
 2026-11-23T22:37:45+00:00,45281433304,verde,todo bien,22,2.4
+2026-11-24T21:09:38+00:00,45488137758,rojo,la fuente falló: NV.SRV.TOTL.KD.ZG: no contestó después de 4 intentos (429 Client Error: Too Many Requests for url: https://api.worldbank.org/v2/country/ECU/indicator/NV.SRV.TOTL.KD.ZG?format=json&date=2015:2025&per_page=100),0,14.6
