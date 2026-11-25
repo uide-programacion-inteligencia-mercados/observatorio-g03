@@ -1,0 +1,8 @@
+# Escribe tu texto al final de cada línea, justo después de los dos puntos (:).
+# Haz clic a la derecha de TITULO: (en esa misma línea) y escribe. No borres nada.
+# Cada texto va en una sola línea. Las líneas que empiezan con # no se leen.
+TITULO:
+SUBTITULO: El robot busca, limpia y analiza los datos. Esta página los muestra con filtros.
+FUENTE:
+PREGUNTA:
+LECTURA:
