@@ -2,4 +2,4 @@
 # Cada integrante escribe UNA línea con su nombre y lo que hizo, y guarda con su propio usuario de GitHub.
 # Ejemplo:
 # Ana Pérez · subí la carpeta dashboard y pedí la publicación
-
+David Ibarra: subida de la carpeta dashboard base y despliegue del tablero en Streamlit Cloud.
