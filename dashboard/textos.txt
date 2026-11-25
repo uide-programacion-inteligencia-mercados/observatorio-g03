@@ -1,8 +1,8 @@
 # Escribe tu texto al final de cada línea, justo después de los dos puntos (:).
 # Haz clic a la derecha de TITULO: (en esa misma línea) y escribe. No borres nada.
 # Cada texto va en una sola línea. Las líneas que empiezan con # no se leen.
-TITULO:
+TITULO: Observatorio Económico de Ecuador: PIB y Sector Servicios (2015-2025)
 SUBTITULO: El robot busca, limpia y analiza los datos. Esta página los muestra con filtros.
-FUENTE:
-PREGUNTA:
-LECTURA:
+FUENTE:Fuente: Banco Mundial (indicadores NV.SRV.TOTL.KD.ZG y NY.GDP.MKTP.KD.ZG), capturado mediante pipeline automatizado en GitHub Actions para el grupo g03.
+PREGUNTA:¿Cómo ha evolucionado el crecimiento del sector servicios en relación con el PIB de Ecuador entre 2015 y 2025?
+LECTURA:Entre 2015 y 2025 los indicadores presentan un promedio conjunto de 1.85% y una mediana de 2.37%, destacando la fuerte contracción de servicios en 2020 (-8.42%) seguida por un rebote de 8.27% en 2021 y una nueva desaceleración a -0.65% en 2024. Conviene priorizar estrategias de eficiencia operativa y diversificación en empresas de servicios ante ciclos de baja expansión económica.
