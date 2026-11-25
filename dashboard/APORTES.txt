@@ -4,3 +4,4 @@
 # Ana Pérez · subí la carpeta dashboard y pedí la publicación
 David Ibarra: subida de la carpeta dashboard base y despliegue del tablero en Streamlit Cloud.
 Adrian Punina: redaccion de titulo, fuente, pregunta de negocio y lectura estrategica en textos.txt.
+Ariel Tapia: validacion funcional del tablero en ventana privada, prueba de filtros y control de calidad.
